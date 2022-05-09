@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "ow": "OpsWrangler/opswrangler",
+    "ow": "opswrangler/opswrangler",
     "@aws-sdk/client-ecs": "^3.56.0",
     "@aws-sdk/client-auto-scaling": "3.75.0"
   }
