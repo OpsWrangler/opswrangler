@@ -1,20 +1,27 @@
-# -= cw.js =-
-CloudWrangler is: 
+# -= ow.js =-
+OpsWrangler is: 
 - A set of scripts, "Functions", geared toward:
   - cloud ops
   - cluster ops
 ## -= Running =-
-CloudWrangler Functions are intentionally self contained, so they can be run via the CLI or independently interface with your code.
+OpsWrangler Functions are intentionally self contained, so they can be run via the CLI or independently interface with your code.
 
 - Via the CLI:
 
 `node cw AWSECSWrangleASG us-west-2 cluster01`
 
-- As an ES6+ module:
+- As an ES6+ module from your code:
 
 ```
-const wrangle = await import('cw/functions/AWSECSWrangleASG.js');
+const wrangle = await import('ow/functions/AWSECSWrangleASG.js');
 await wrangle.run('us-east-1', 'cluster01');
+```
+
+- As an ES6+ module fron the CLI:
+```
+OW_CLUSTER=somecluster
+OW_REGION=us-west-1
+node ./functions/AWSECSWrangleASG.js
 ```
 
 - As a Lambda cron job, utilizing Serverless framework. To deploy:
