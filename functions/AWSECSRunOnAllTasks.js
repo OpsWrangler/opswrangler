@@ -41,9 +41,7 @@ export default async function run() {
 
         const params = {
             region: arguments[0] || process.env.OW_REGION || "",
-            Region: arguments[0] || process.env.OW_REGION || "",
             cluster: arguments[1] || process.env.OW_CLUSTER || "",
-            Cluster: arguments[1] || process.env.OW_CLUSTER || "",
             commandToRun: arguments[2] || process.env.OW_COMMANDTORUN || ""
         };
 
@@ -58,9 +56,12 @@ export default async function run() {
             }))
 
 
-        // For each task, use ECS Exec to run the command
+        
         for (const taskToRunOn of tasksToRunOn.taskArns) {
+
             console.log(`Running command on task: ${taskToRunOn}`);
+            
+            // For each task, use ECS Exec to run the command
             const thisTask = await ecsclient.send(
                 new ExecuteCommandCommand({
                     cluster: params.cluster,
