@@ -14,7 +14,8 @@
  * node ow AWSECSWrangleASG [region] [clustername]
  */
 
-const run = async () => {
+
+export const ow = async (event) => {
 
     try {
         // Parse the CLI string
@@ -29,12 +30,12 @@ const run = async () => {
         const args = params.slice(1);
 
         // Run the function and wait
-        const functionToRun = await import(`./functions/${functionName}.js`);
-        await functionToRun.run(...args);
+        let functionToRun = await import(`./functions/${functionName}.js`);
+        await functionToRun.default(...args);
 
         } catch (err) {
             console.log("Error", err);
     } 
 }
 
-run();
+ow();

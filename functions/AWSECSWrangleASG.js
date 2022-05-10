@@ -15,6 +15,11 @@
  * @param {String} [OW_CAPACITYPROVIDER] Capacity Provider
  * 
  */
+
+// These 2 imports are used to check if the function is run directly from the CLI vs as an ES6 module
+import { fileURLToPath } from 'url';
+import process from 'process';
+
 import {
     ECSClient,
     ListContainerInstancesCommand,
@@ -161,4 +166,9 @@ export default async function run() {
         setTimeout(() => x(), 1000)
     });
 
+}
+
+// Check if the function was run from CLI
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+    run();
 }

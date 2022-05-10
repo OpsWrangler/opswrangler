@@ -16,6 +16,10 @@
  * 
  */
 
+// These 2 imports are used to check if the function is run directly from the CLI vs as an ES6 module
+import { fileURLToPath } from 'url';
+import process from 'process';
+
 import {
     ECSClient,
     ListTasksCommand,
@@ -37,7 +41,9 @@ export default async function run() {
 
         const params = {
             region: arguments[0] || process.env.OW_REGION || "",
+            Region: arguments[0] || process.env.OW_REGION || "",
             cluster: arguments[1] || process.env.OW_CLUSTER || "",
+            Cluster: arguments[1] || process.env.OW_CLUSTER || "",
             commandToRun: arguments[2] || process.env.OW_COMMANDTORUN || ""
         };
 
@@ -50,9 +56,11 @@ export default async function run() {
                 cluster: params.cluster,
                 desiredStatus: "RUNNING"
             }))
-        
+
+
         // For each task, use ECS Exec to run the command
         for (const taskToRunOn of tasksToRunOn.taskArns) {
+            console.log(`Running command on task: ${taskToRunOn}`);
             const thisTask = await ecsclient.send(
                 new ExecuteCommandCommand({
                     cluster: params.cluster,
@@ -101,4 +109,7 @@ export default async function run() {
 
 }
 
-run();
+// Check if the function was run from CLI
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+    run();
+}

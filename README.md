@@ -29,7 +29,7 @@ node ./functions/AWSECSWrangleASG.js
 ```
 npm install -g serverless
 
-cd examples/serverlessFramework
+cd serverlessExample
 npm install
 sls deploy --stage prod
 ```
