@@ -14,7 +14,7 @@ export const cron = async (event) => {
   for (const aCluster of clusters) {
     try {
       // Run Cloud Wrangler function we've imported as 'wrangle' and wait
-      await wrangle.run(region, aCluster);
+      await wrangle.default(region, aCluster);
         } catch (err) {
           console.error("Error", err);
       }
