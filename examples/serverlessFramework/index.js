@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const wrangle = await import('cw/functions/AWSECSWrangleASG.js');
+const wrangle = await import('ow/functions/AWSECSWrangleASG.js');
 
 // Set the region for Cloud Wrangler function
 const region = 'us-west-2';
